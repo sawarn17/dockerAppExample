@@ -1,0 +1,20 @@
+apiVersion: apps/v1 #it describe the version of the our api server
+kind: Deployment # Kubernetes resource kind we are creating if it is for dep the Deplloyment otherwise for service Service
+metadata:
+  name: ayam-first-app-on-k8
+spec:
+  selector:
+    matchLabels:
+      app: ayam-first-app-on-k8
+  replicas: 4 # Number of replicas that will be created for this deployment
+  template:
+    metadata:
+      labels:
+        app: ayam-first-app-on-k8
+    spec:
+      containers:
+        - name: ayam-multi-clustred-node
+          image: ayamshifo/ayam-first-spring-app:v1.0.0 # Image that will be used to containers in the cluster
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080 # The port that the container is running on in the cluster
